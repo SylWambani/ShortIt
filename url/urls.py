@@ -1,11 +1,13 @@
 from django.urls import path
 from rest_framework_nested import routers
-from . import views
+from .views import UrlDetailViewSet,ShortUrlViewSet, redirect_short_url
 
 
 router = routers.DefaultRouter()
-router.register('list-urls', views.UrlDetailViewSet, basename='urls')
-router.register('generate', views.ShortUrlViewSet)
+router.register('list-urls', UrlDetailViewSet, basename='urls')
+router.register('generate', ShortUrlViewSet, basename='generate')
 
 
-urlpatterns = router.urls
+urlpatterns = router.urls+ [
+    path('s/<str:short_code>/', redirect_short_url, name='redirect'),
+]
