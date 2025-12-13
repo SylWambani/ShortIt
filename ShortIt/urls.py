@@ -22,6 +22,6 @@ import debug_toolbar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('shorten-url', include('url.urls')),
+    path('shorten-url/', include('url.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
