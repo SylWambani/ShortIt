@@ -23,5 +23,8 @@ import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shorten-url/', include('url.urls')),
+    path('account/', include('accounts.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
