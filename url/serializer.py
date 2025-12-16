@@ -8,6 +8,7 @@ class UrlDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model=Url
         fields=['id', 'long_url', 'short_code','short_url', 'created_at']
+        read_only_fields = ['short_code']
 
     def get_short_url(self, obj):
         request = self.context.get('request')

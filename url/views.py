@@ -7,7 +7,6 @@ from .serializer import UrlDetailSerializer, ShortUrlSerializer
 
 class UrlDetailViewSet(ModelViewSet):
     serializer_class = UrlDetailSerializer
-    queryset=Url.objects.all()
     permission_classes=[IsAuthenticated]
     authentication_classes=[JWTAuthentication]
 
@@ -15,12 +14,21 @@ class UrlDetailViewSet(ModelViewSet):
         context = super().get_serializer_context()
         context['request'] = self.request
         return context
+    
+    def get_queryset(self):
+        return Url.objects.filter(user=self.request.user) 
 
 class ShortUrlViewSet(ModelViewSet):
     serializer_class = ShortUrlSerializer
-    queryset=Url.objects.all()
+    #queryset=Url.objects.all() making sure every user sees their tasks, this is the last update
     permission_classes=[IsAuthenticated]
     authentication_classes=[JWTAuthentication]
+
+    def get_queryset(self):
+        return Url.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 def redirect_short_url(request, short_code):
     url = get_object_or_404(Url, short_code=short_code)
