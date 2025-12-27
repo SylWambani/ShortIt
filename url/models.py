@@ -15,3 +15,4 @@ class Url(models.Model):
             self.short_code = create_unique_code()
         super().save(*args, **kwargs)
 
+ 
