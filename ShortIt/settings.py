@@ -30,6 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+FRONTEND_DOMAIN = "http://localhost:5173"  # dev
+# FRONTEND_DOMAIN = "https://shortit.io"  # prod
+
 
 # Application definition
 
