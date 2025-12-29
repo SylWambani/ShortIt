@@ -1,18 +1,23 @@
-import { Box } from "@chakra-ui/react";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/pages/HomePage";
-import FooterSection from "./components/sections/FooterSection";
-import NavBar from "./components/sections/NavBar";
+import LogInPage from "./components/pages/LogInPage";
+import MainLayout from "./components/layouts/MainLayout";
 
 function App() {
   return (
-    <Box display='flex' minH="100svh" width="100%" flexDirection='column'>
-      <NavBar />
-      <Box flex="1">
-        <HomePage />
-      </Box>
-      <FooterSection />
-    </Box>
+    <HashRouter>
+      <Routes>
+        {/* Pages WITH navbar + footer */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          {/* add more public pages here */}
+        </Route>
+
+        {/* Pages WITHOUT navbar + footer */}
+        <Route path="/shortit-login" element={<LogInPage />} />
+      </Routes>
+    </HashRouter>
   );
 }
 

@@ -1,10 +1,17 @@
 import { Box, ButtonGroup, Heading, Text } from "@chakra-ui/react";
 import Buttons from "./Buttons";
+import { useNavigate } from "react-router-dom";
 import IntentionalSection from "./IntentionalSection";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleLogInClick = () => {
+    navigate("/shortit-login");
+  };
+
   return (
-    <Box width="100%" padding={{ base: "20px", xl:"30px" }}>
+    <Box width="100%" padding={{ base: "20px", xl: "30px" }}>
       <Heading fontSize={{ base: "3xl" }} textAlign="center">
         Shorten links. Share smarter.
       </Heading>
@@ -18,12 +25,12 @@ const HeroSection = () => {
         one place.
       </Heading>
       <IntentionalSection />
-      <Text textAlign={{base:'left', xl:"center"}}>
+      <Text textAlign={{ base: "left", xl: "center" }}>
         Want to track clicks and manage your links? Create an account.
       </Text>
-      <ButtonGroup  display='flex' justifyContent='center' paddingTop="20px">
-        <Buttons type='submit'>Get Started</Buttons>
-        <Buttons>Sign In</Buttons>
+      <ButtonGroup display="flex" justifyContent="center" paddingTop="20px">
+        <Buttons type="submit">Get Started</Buttons>
+        <Buttons onClick={handleLogInClick}>Sign In</Buttons>
       </ButtonGroup>
     </Box>
   );

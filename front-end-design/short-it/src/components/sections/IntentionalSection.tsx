@@ -9,7 +9,7 @@ import {
   HStack,
   IconButton,
 } from "@chakra-ui/react";
-import { toaster, Toaster } from '../ui/toaster';
+import { toaster, Toaster } from "../ui/toaster";
 import { Copy } from "lucide-react";
 import Buttons from "./Buttons";
 import axiosInstance from "../api/axiosInstance";
@@ -20,13 +20,33 @@ const IntentionalSection = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleShorten = async () => {
-    if (!longUrl) return;
+  const isValidUrl = (value: string) => {
+    try {
+      const url = new URL(value);
+      return url.protocol === "http:" || url.protocol === "https:";
+    } catch {
+      return false;
+    }
+  };
 
-    setLoading(true);
+  const handleShorten = async () => {
     setError("");
+    setShortUrl("");
+
+    if (!longUrl.trim()) {
+      setError("Please enter a URL.");
+      return;
+    }
+
+    if (!isValidUrl(longUrl)) {
+      setError(
+        "Please enter a valid URL (must start with http:// or https://)."
+      );
+      return;
+    }
 
     try {
+      setLoading(true);
       const response = await axiosInstance.post("/shorten-url/generate/", {
         long_url: longUrl,
       });
@@ -68,7 +88,10 @@ const IntentionalSection = () => {
             <Field.Label>Paste your long URL here</Field.Label>
             <Input
               placeholder="https//example.com/my-long-url"
-              onChange={(e) => setLongUrl(e.target.value)}
+              onChange={(e) => {
+                setLongUrl(e.target.value);
+                setError("");
+              }}
             />
             {error && (
               <Text mt={4} color="#EF4444">
@@ -80,7 +103,10 @@ const IntentionalSection = () => {
           {shortUrl && (
             <HStack mt={4}>
               <Text>Short URL:</Text>
-              <Link href={shortUrl} _hover={{ color: "#14B8A6", cursor:"pointer" }}>
+              <Link
+                href={shortUrl}
+                _hover={{ color: "#14B8A6", cursor: "pointer" }}
+              >
                 {shortUrl}
               </Link>
               <IconButton
@@ -101,7 +127,14 @@ const IntentionalSection = () => {
           )}
         </Card.Body>
         <Card.Footer justifyContent="center">
-          <Buttons onClick={handleShorten}>Shorten URL</Buttons>
+          <Buttons
+            loading={loading}
+            loadingText="Shortening URL..."
+            disabled={loading}
+            onClick={handleShorten}
+          >
+            Shorten URL
+          </Buttons>
         </Card.Footer>
       </Card.Root>
     </Flex>
@@ -109,4 +142,3 @@ const IntentionalSection = () => {
 };
 
 export default IntentionalSection;
-
