@@ -2,6 +2,7 @@ from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from django.shortcuts import redirect, get_object_or_404
 from rest_framework.permissions import AllowAny, DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly, IsAdminUser, IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from .pagination import DefaultPagination
 from .models import Url
 from .serializer import UrlDetailSerializer, ShortUrlSerializer
 
@@ -9,6 +10,9 @@ class UrlDetailViewSet(ModelViewSet):
     serializer_class = UrlDetailSerializer
     permission_classes=[IsAuthenticated]
     authentication_classes=[JWTAuthentication]
+    pagination_class = DefaultPagination
+    ordering = ['-created_at']
+    ordering_fields = ['created_at']
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
@@ -16,7 +20,7 @@ class UrlDetailViewSet(ModelViewSet):
         return context
     
     def get_queryset(self):
-        return Url.objects.filter(user=self.request.user) 
+        return Url.objects.filter(user=self.request.user).order_by('-created_at')
 
 class ShortUrlViewSet(ModelViewSet):
     serializer_class = ShortUrlSerializer
@@ -32,10 +36,12 @@ class ShortUrlViewSet(ModelViewSet):
         return Url.objects.none()
 
     def perform_create(self, serializer):
-        if self.request.user.is_authenticated:
-            serializer.save(user=self.request.user)
-        else:
-            serializer.save()
+        serializer.save(user=self.request.user if self.request.user.is_authenticated else None)
+
+       # if self.request.user.is_authenticated:
+        #    serializer.save(user=self.request.user)
+        #else:
+         #   serializer.save()
             
         
 
