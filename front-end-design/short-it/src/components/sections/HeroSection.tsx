@@ -7,7 +7,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   const handleLogInClick = () => {
-    navigate("/shortit-login");
+    navigate("/login");
   };
 
   return (
@@ -24,7 +24,7 @@ const HeroSection = () => {
         Create clean, short URLs in seconds and track how they perform — all in
         one place.
       </Heading>
-      <IntentionalSection />
+      <IntentionalSection isAuthenticated={false} />
       <Text textAlign={{ base: "left", xl: "center" }}>
         Want to track clicks and manage your links? Create an account.
       </Text>

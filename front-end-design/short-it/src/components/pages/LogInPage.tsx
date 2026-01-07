@@ -12,7 +12,6 @@ import {
 import { type Options, passwordStrength } from "check-password-strength";
 import { PasswordInput, PasswordStrengthMeter } from "../ui/password-input";
 import { useEffect, useMemo, useState } from "react";
-import { toaster, Toaster } from "../ui/toaster";
 import { useNavigate } from "react-router-dom";
 import Logo from "../sections/Logo";
 import Buttons from "../sections/Buttons";
@@ -94,18 +93,10 @@ const LogInPage = () => {
         throw new Error("Something went wrong. Please try again.");
       }
 
-      toaster.create({
-        title: "Login successful",
-        description: "Welcome back!",
-        type: "success",
-        duration: 2000,
-        closable: true,
-      });
-
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
       localStorage.setItem("loginSuccess", "true");
-      navigate("/dash-board");
+      navigate("/dashboard");
     } catch (error: any) {
       setError(error.message);
       console.error(error);
@@ -125,7 +116,6 @@ const LogInPage = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Toaster />
       <Card.Root borderRadius="18px" shadow="2xl" size="lg">
         <Card.Header textAlign="center">
           <Logo />
