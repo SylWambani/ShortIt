@@ -6,6 +6,7 @@ import Buttons from "../sections/Buttons";
 import TablesSection from "../sections/TablesSection";
 
 import type { Links } from "./DashBoardPage";
+import TableSkeleton from "../sections/TableSkeleton";
 
 const HistoryPage = () => {
   const [links, setLinks] = useState<Links[]>([]);
@@ -15,6 +16,8 @@ const HistoryPage = () => {
   const [page, setPage] = useState(1);
   const [hasNext, setHasNext] = useState(false);
   const [hasPrev, setHasPrev] = useState(false);
+
+  
 
   useEffect(() => {
     const fetchLinks = async () => {

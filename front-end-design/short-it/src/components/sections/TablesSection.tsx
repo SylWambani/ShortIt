@@ -3,6 +3,7 @@ import type { Links } from "../pages/DashBoardPage";
 import { formatDateTimeInput } from "./DateTime";
 import Delete from "./Delete";
 import Copying from "./Copying";
+import TableSkeleton from "./TableSkeleton";
 
 export interface TablesSectionProps {
   links: Links[];
@@ -12,10 +13,10 @@ export interface TablesSectionProps {
 
 const TablesSection = ({ links, loading, onDelete }: TablesSectionProps) => {
   if (loading) {
-    return <Text mt="20px">Loading...</Text>;
+    return <TableSkeleton rows={5}/>;
   }
 
-  if (!loading && links.length === 0) {
+  if (links.length === 0) {
     return (
       <Table.ScrollArea borderWidth="1px" maxW="xl">
         <Table.Root>
