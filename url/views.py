@@ -1,3 +1,4 @@
+from rest_framework import filters
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from django.shortcuts import redirect, get_object_or_404
 from rest_framework.permissions import AllowAny, DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly, IsAdminUser, IsAuthenticated
@@ -11,8 +12,12 @@ class UrlDetailViewSet(ModelViewSet):
     permission_classes=[IsAuthenticated]
     authentication_classes=[JWTAuthentication]
     pagination_class = DefaultPagination
+    search_fields = ["short_code", "long_url"]
     ordering = ['-created_at']
-    ordering_fields = ['created_at']
+    ordering_fields = ['created_at', 'clicks']
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    
+    
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
