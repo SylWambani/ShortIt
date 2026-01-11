@@ -5,9 +5,8 @@ import NavBar from "../sections/NavBar";
 const DashBoardLayout = () => {
   return (
     <Box display="flex" minH="100svh" flexDirection="column">
-      <NavBar>
-      </NavBar>
-      <Box flex="1">
+      <NavBar />
+      <Box flex="1" px={{ base: 4, md: 8 }} py={4}>
         <Outlet />
       </Box>
     </Box>

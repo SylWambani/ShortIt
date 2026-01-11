@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { toaster } from "../ui/toaster";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import IntentionalSection from "../sections/IntentionalSection";
 import TablesSection from "../sections/TablesSection";
 import axiosInstance from "../api/axiosInstance";
+import Buttons from "../sections/Buttons";
+import { useNavigate } from "react-router-dom";
 
 export interface Links {
   id: number;
@@ -23,11 +25,15 @@ export interface PaginatedResponse<T> {
 const DashBoardPage = () => {
   const [links, setLinks] = useState<Links[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchLinks = async () => {
     try {
       const res = await axiosInstance.get<PaginatedResponse<Links>>(
-        "/shorten-url/list-urls"
+        "/shorten-url/list-urls",
+        {
+          params: { page: 1, page_size: 5 },
+        }
       );
       setLinks(res.data.results);
     } catch (err: any) {
@@ -76,10 +82,24 @@ const DashBoardPage = () => {
       localStorage.removeItem("loginSuccess");
     }
   }, []);
+
+  const handleHistoryClick = () => {
+    navigate("/history");
+  };
+
   return (
-    <Box width="100%" padding={{ base: "15px", sm:"35px" }} pt='30px'>
+    <Box width="100%" padding={{ base: "5px", sm: "35px" }} pt="30px">
       <IntentionalSection isAuthenticated={true} onLinkCreated={fetchLinks} />
       <TablesSection links={links} loading={loading} onDelete={handleDelete} />
+      <Flex
+        justifyContent="right"
+        justifySelf="right"
+        width={{ base: "100%", md: "50%" }}
+      >
+        <Buttons mt="20px" onClick={handleHistoryClick}>
+          View All Links
+        </Buttons>
+      </Flex>
     </Box>
   );
 };

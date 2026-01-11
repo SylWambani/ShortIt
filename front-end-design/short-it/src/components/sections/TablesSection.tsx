@@ -1,34 +1,21 @@
-import {
-  Table,
-  Heading,
-  Link,
-  Text,
-  Box,
-  HStack,
-  Flex,
-} from "@chakra-ui/react";
+import { Table, Heading, Link, Text, Box, HStack } from "@chakra-ui/react";
 import type { Links } from "../pages/DashBoardPage";
 import { formatDateTimeInput } from "./DateTime";
 import Delete from "./Delete";
 import Copying from "./Copying";
-import Buttons from "./Buttons";
-import { useNavigate } from "react-router-dom";
 
-interface TablesSectionProps {
+export interface TablesSectionProps {
   links: Links[];
   loading: boolean;
   onDelete: (id: number) => void;
 }
 
 const TablesSection = ({ links, loading, onDelete }: TablesSectionProps) => {
-  const navigate = useNavigate();
-  
-    
   if (loading) {
-    return <Text mt='20px'>Loading...</Text>;
+    return <Text mt="20px">Loading...</Text>;
   }
 
-  if (links.length === 0) {
+  if (!loading && links.length === 0) {
     return (
       <Table.ScrollArea borderWidth="1px" maxW="xl">
         <Table.Root>
@@ -53,10 +40,6 @@ const TablesSection = ({ links, loading, onDelete }: TablesSectionProps) => {
       </Table.ScrollArea>
     );
   }
-
-  const handleHistoryClick = () => {
-    navigate("/history");
-  };
 
   return (
     <Box mt="30px" width="100%" overflowX={{ md: "hidden" }}>
@@ -86,15 +69,32 @@ const TablesSection = ({ links, loading, onDelete }: TablesSectionProps) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {link.short_url.length > 20
-                      ? link.short_url.slice(0, 20) + "..."
-                      : link.short_url}
+                    {/*Mobile */}
+                    <Text display={{ base: "block", md: "none" }}>
+                      {link.short_url.length > 20
+                        ? link.short_url.slice(0, 20) + "..."
+                        : link.short_url}
+                    </Text>
+                    {/*Desktop */}
+                    <Text display={{ base: "none", md: "block" }}>
+                      {link.short_url}{" "}
+                    </Text>
                   </Link>
                 </Table.Cell>
                 <Table.Cell>
-                  {link.long_url.length > 20
-                    ? link.long_url.slice(0, 20) + "..."
-                    : link.long_url}
+                  {/* Mobile */}
+                  <Text display={{ base: "block", md: "none" }}>
+                    {link.long_url.length > 20
+                      ? link.long_url.slice(0, 20) + "..."
+                      : link.long_url}
+                  </Text>
+
+                  {/* Desktop */}
+                  <Text display={{ base: "none", md: "block" }}>
+                    {link.long_url.length > 30
+                      ? link.long_url.slice(0, 30) + "..."
+                      : link.long_url}
+                  </Text>
                 </Table.Cell>
                 <Table.Cell>{link.clicks}</Table.Cell>
                 <Table.Cell>
@@ -113,9 +113,6 @@ const TablesSection = ({ links, loading, onDelete }: TablesSectionProps) => {
           </Table.Body>
         </Table.Root>
       </Table.ScrollArea>
-      <Flex justifyContent="right" justifySelf="right" width={{base:"100%", md: "50%" }}>
-        <Buttons mt="20px" onClick={handleHistoryClick}>View All Links</Buttons>
-      </Flex>
     </Box>
   );
 };
