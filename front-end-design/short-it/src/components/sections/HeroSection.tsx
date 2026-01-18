@@ -9,6 +9,9 @@ const HeroSection = () => {
   const handleLogInClick = () => {
     navigate("/login");
   };
+   const handleSignUpClick = () => {
+     navigate("/signup");
+   };
 
   return (
     <Box width="100%" padding={{ base: "20px", xl: "30px" }}>
@@ -29,7 +32,7 @@ const HeroSection = () => {
         Want to track clicks and manage your links? Create an account.
       </Text>
       <ButtonGroup display="flex" justifyContent="center" paddingTop="20px">
-        <Buttons type="submit">Get Started</Buttons>
+        <Buttons onClick={handleSignUpClick}>Get Started</Buttons>
         <Buttons onClick={handleLogInClick}>Sign In</Buttons>
       </ButtonGroup>
     </Box>

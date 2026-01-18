@@ -7,6 +7,8 @@ import MainLayout from "./components/layouts/MainLayout";
 import DashBoardLayout from "./components/layouts/DashBoardLayout";
 import DashBoardPage from "./components/pages/DashBoardPage";
 import HistoryPage from "./components/pages/HistoryPage";
+import HistoryLayout from "./components/layouts/HistoryLayout";
+import SignUpPage from "./components/pages/SignUpPage";
 
 function App() {
   return (
@@ -22,11 +24,14 @@ function App() {
           {/*Pages WITH navbar*/}
           <Route element={<DashBoardLayout />}>
             <Route path="/dashboard" element={<DashBoardPage />} />
+          </Route>
+          <Route element={<HistoryLayout />}>
             <Route path="/history" element={<HistoryPage />} />
           </Route>
 
           {/* Pages WITHOUT navbar + footer */}
           <Route path="/login" element={<LogInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
       </HashRouter>
     </>

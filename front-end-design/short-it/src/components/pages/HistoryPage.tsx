@@ -6,7 +6,6 @@ import Buttons from "../sections/Buttons";
 import TablesSection from "../sections/TablesSection";
 
 import type { Links } from "./DashBoardPage";
-import TableSkeleton from "../sections/TableSkeleton";
 
 const HistoryPage = () => {
   const [links, setLinks] = useState<Links[]>([]);

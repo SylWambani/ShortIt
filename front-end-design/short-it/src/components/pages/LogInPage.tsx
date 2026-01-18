@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../sections/Logo";
 import Buttons from "../sections/Buttons";
 
-const strengthOptions: Options<string> = [
+export const strengthOptions: Options<string> = [
   { id: 1, value: "weak", minDiversity: 0, minLength: 0 },
   { id: 2, value: "medium", minDiversity: 2, minLength: 6 },
   { id: 3, value: "strong", minDiversity: 3, minLength: 8 },
