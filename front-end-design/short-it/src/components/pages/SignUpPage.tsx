@@ -34,6 +34,7 @@ const SignUpPage = () => {
   const [visible, setVisible] = useState(false);
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [users, setUsers] = useState<User>({
     username: "",
     password: "",   
@@ -71,6 +72,11 @@ const SignUpPage = () => {
       setError("Password is required");
       return;
     }
+
+    /*if (users.password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }*/
 
     setError("");
 
@@ -128,7 +134,12 @@ const SignUpPage = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Card.Root width={{ md:'55%', lg:'40%', xl:'30%'}}  borderRadius="18px" shadow="2xl" size='lg'>
+      <Card.Root
+        width={{ md: "55%", lg: "40%", xl: "30%" }}
+        borderRadius="18px"
+        shadow="2xl"
+        size="lg"
+      >
         <form onSubmit={handleSubmit}>
           <Card.Header textAlign="center">
             <Logo />
@@ -216,6 +227,27 @@ const SignUpPage = () => {
               />
               <PasswordStrengthMeter value={strength} />
             </Field.Root>
+            <Field.Root required>
+              <Field.Label>
+                Confirm Password <Field.RequiredIndicator />
+              </Field.Label>
+              <PasswordInput
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setError("");
+                }}
+                placeholder="Confirm your password"
+                focusRingColor="#14B8A6"
+              />
+            </Field.Root>
+
+            {confirmPassword && users.password !== confirmPassword && (
+              <Text color="#EF4444" fontSize="sm">
+                Passwords do not match
+              </Text>
+            )}
+
             {error && (
               <Text color="#EF4444" fontSize="sm" mb="10px">
                 {error}

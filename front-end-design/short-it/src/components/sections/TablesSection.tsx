@@ -18,27 +18,30 @@ const TablesSection = ({ links, loading, onDelete }: TablesSectionProps) => {
 
   if (links.length === 0) {
     return (
-      <Table.ScrollArea borderWidth="1px" maxW="xl">
-        <Table.Root>
-          <Table.Caption />
-          <Table.Header>
-            <Table.Row backgroundColor="#1E3A8A">
-              <Table.ColumnHeader>Short link</Table.ColumnHeader>
-              <Table.ColumnHeader>Original link</Table.ColumnHeader>
-              <Table.ColumnHeader>Clicks</Table.ColumnHeader>
-              <Table.ColumnHeader>Created </Table.ColumnHeader>
-              <Table.ColumnHeader>Actions</Table.ColumnHeader>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell textAlign="center">
-                You haven’t created any links yet
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table.Root>
-      </Table.ScrollArea>
+      <Box mt="30px" width="100%" overflowX={{ md: "hidden" }} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
+        <Heading textAlign="center">Your links</Heading>
+        <Table.ScrollArea borderWidth="1px" maxW="xl">
+          <Table.Root>
+            <Table.Caption />
+            <Table.Header>
+              <Table.Row backgroundColor="#1E3A8A">
+                <Table.ColumnHeader>Short link</Table.ColumnHeader>
+                <Table.ColumnHeader>Original link</Table.ColumnHeader>
+                <Table.ColumnHeader>Clicks</Table.ColumnHeader>
+                <Table.ColumnHeader>Created </Table.ColumnHeader>
+                <Table.ColumnHeader>Actions</Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell textAlign="center">
+                  You haven’t created any links yet
+                </Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table.Root>
+        </Table.ScrollArea>
+      </Box>
     );
   }
 

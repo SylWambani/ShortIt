@@ -1,6 +1,7 @@
-import { Box, Button, Link } from "@chakra-ui/react";
+import { Box, Link } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "react-router-dom";
 import NavBar from "../sections/NavBar";
+import LogoutButton from "../sections/LogoutButton";
 
 const DashBoardLayout = () => {
   const navigate = useNavigate();
@@ -11,12 +12,15 @@ const DashBoardLayout = () => {
   return (
     <Box display="flex" minH="100svh" flexDirection="column">
       <NavBar>
-        <Link
+        <Box
+          width="50%"
+          display="flex"
+          justifyContent="space-evenly"
           fontWeight="medium"
-          onClick={handleDashBoardClick}
         >
-          Dashboard
-        </Link>
+          <Link onClick={handleDashBoardClick}>Dashboard</Link>
+          <LogoutButton />
+        </Box>
       </NavBar>
       <Box flex="1" px={{ base: 4, md: 8 }} py={4}>
         <Outlet />

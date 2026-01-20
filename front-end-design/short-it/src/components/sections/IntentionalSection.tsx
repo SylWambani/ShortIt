@@ -6,7 +6,7 @@ import {
   Flex,
   Text,
   Link,
-  HStack,
+  Box,
 } from "@chakra-ui/react";
 import Buttons from "./Buttons";
 import axiosInstance from "../api/axiosInstance";
@@ -93,7 +93,7 @@ const IntentionalSection = ({ isAuthenticated = false, onLinkCreated }: Intentio
             <Field.ErrorText>This field is required</Field.ErrorText>
           </Field.Root>
           {shortUrl && (
-            <HStack mt={4}>
+            <Box mt={4} >
               <Text>Your link is ready:</Text>
               <Link
                 href={shortUrl}
@@ -104,7 +104,7 @@ const IntentionalSection = ({ isAuthenticated = false, onLinkCreated }: Intentio
                 {shortUrl}
               </Link>
               <Copying value={shortUrl} />
-            </HStack>
+            </Box>
           )}
         </Card.Body>
         <Card.Footer justifyContent="center">
