@@ -2,7 +2,7 @@ import { HStack } from "@chakra-ui/react";
 import Logo from "./Logo";
 
 interface NavBarProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
  }
 
 

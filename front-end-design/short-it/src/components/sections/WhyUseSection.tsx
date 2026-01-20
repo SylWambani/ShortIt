@@ -1,6 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
 
-
 const WhyUseSection = () => {
   return ( 
     <Box width="100%"  textAlign='center' paddingBottom='20px' paddingTop='20px'>

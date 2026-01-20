@@ -1,6 +1,5 @@
 import { Heading } from "@chakra-ui/react"
 
-
 const Logo = () => {
   return (
       <Heading size={{base:'3xl'}} fontWeight='bold'>
