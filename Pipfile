@@ -12,6 +12,7 @@ djoser = "*"
 django-cors-headers = "*"
 gunicorn = "*"
 dj-database-url = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [dev-packages]
 
