@@ -7,7 +7,7 @@ DEBUG = False
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['', 'localhost']
+ALLOWED_HOSTS = ['shortit-6b2j.onrender.com', 'localhost']
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -21,12 +21,12 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
     "https://sylwambani.github.io",
-    "https://taskmate-2-kxfe.onrender.com",
+    "https://shortit-6b2j.onrender.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://sylwambani.github.io",
-    "https://taskmate-2-kxfe.onrender.com",
+    "https://shortit-6b2j.onrender.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
