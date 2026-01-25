@@ -10,6 +10,7 @@ drf-nested-routers = "*"
 mysqlclient = "*"
 djoser = "*"
 django-cors-headers = "*"
+gunicorn = "*"
 
 [dev-packages]
 
