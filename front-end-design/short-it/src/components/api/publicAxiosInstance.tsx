@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const publicAxios = axios.create({
-  baseURL: "https://shortit-6b2j.onrender.com",
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
