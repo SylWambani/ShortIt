@@ -41,7 +41,7 @@ const LogInPage = () => {
     const token = localStorage.getItem("access");
     if (!token) return;
 
-    fetch("http://127.0.0.1:8000/shorten-url/", {
+    fetch(`${import.meta.env.VITE_API_URL}/shorten-url/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -70,14 +70,17 @@ const LogInPage = () => {
     }
 
     setError("");
-
+    /*Nexttime use axiosInstance tp fetch*/
     try {
       setLoading(true);
-      const res = await fetch("http://127.0.0.1:8000/auth/jwt/create/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/jwt/create/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        },
+      );
 
       const data = await res.json();
 
