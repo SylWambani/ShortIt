@@ -66,9 +66,7 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'Authorization',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+
 
 
 TEMPLATES = [
